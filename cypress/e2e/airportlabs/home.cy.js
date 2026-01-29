@@ -60,4 +60,32 @@ describe("AirportLabs Home Page", () => {
         expect(element.width()).to.be.lessThan(813);
       });
   });
+
+  it("should validate statistics section", () => {
+    cy.fixture("statistics").then((stats) => {
+      const { value, label, color } = stats.airportsWorldwide;
+
+      airportLabHomePage
+        .getStatisticValue(label)
+        .should("be.visible")
+        .and("contain.text", value)
+        .and("have.css", "color", color);
+
+      airportLabHomePage
+        .getStatisticLabel(label)
+        .should("be.visible")
+        .and("have.text", label);
+    });
+  });
+
+  it.only("should validate statistic values are not empty", () => {
+    cy.fixture("statistics").then((stats) => {
+      const { label } = stats.airportsWorldwide;
+
+      airportLabHomePage
+        .getStatisticValue(label)
+        .should("not.be.empty")
+        .and("not.have.text", "");
+    });
+  });
 });
