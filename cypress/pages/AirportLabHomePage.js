@@ -11,7 +11,10 @@ export class AirportLabHomePage {
   }
 
   getActivityInNumbersSection() {
-    return cy.contains("h2", /Our activity in numbers/i).closest(".our-impact").scrollIntoView();
+    return cy
+      .contains("h2", /Our activity in numbers/i)
+      .closest(".our-impact")
+      .scrollIntoView();
   }
 
   getStatisticByLabel(label) {
@@ -26,5 +29,27 @@ export class AirportLabHomePage {
 
   getStatisticLabel(label) {
     return this.getStatisticByLabel(label).find("h4, h3");
+  }
+
+  getFooterSocialLink(platformName) {
+    return cy
+      .get(`.footer a[href*="${platformName.toLowerCase()}"]`)
+      .scrollIntoView();
+  }
+
+  getLogo() {
+    return cy.get('.navbar-row-2 a[href="/"] img');
+  }
+
+  getProductTabsMenu() {
+    return cy.get(".tabs-menu").scrollIntoView();
+  }
+
+  getProductTab(label) {
+    return this.getProductTabsMenu().contains(".w-tab-link", label).scrollIntoView();
+  }
+
+  getActiveTabPane() {
+    return cy.get(".w-tab-pane.w--tab-active");
   }
 }
