@@ -7,6 +7,12 @@ export class EmagTvCategoryPage {
     getCategoryTitle: () => cy.get('h1[class*="title-phrasing"]'),
     getSortDropdown: () =>
       cy.get('div[class*="sort-control-btn-dropdown"]').find("button").eq(0),
+    getRatingFilter5Stars: () => cy.get('a[data-option-id="5-5"]'),
+    getFirstCard: () =>
+      cy.get("#card_grid").find('div[class*="card-item"]').eq(0),
+    getCloseModalButton: () => cy.get('button[aria-label="Inchide"]'),
+    getAccesoriesCategory: () => cy.contains("a", "Accesorii TV"),
+    getCartButton: () => cy.get('a[id="my_cart"]'),
   };
 
   clickBrandFilter() {
@@ -26,7 +32,7 @@ export class EmagTvCategoryPage {
           .should("be.visible")
           .click();
       });
-    cy.wait(1000);
+    cy.wait(1500);
   }
 
   clickShowResultsButton() {
@@ -41,5 +47,34 @@ export class EmagTvCategoryPage {
     this.elements.getSortDropdown().click({ force: true });
     cy.get("a").contains(optionText).should("be.visible").click();
     cy.wait(2000);
+  }
+
+  clickRatingFilter5Stars() {
+    this.elements.getRatingFilter5Stars().scrollIntoView().click();
+    cy.wait(2000);
+  }
+
+  clickAddToCartOnFirstProduct() {
+    this.elements
+      .getFirstCard()
+      .find('button[class*="yeahIWantThisProduct"]')
+      .scrollIntoView()
+      .click();
+    cy.wait(2000);
+  }
+
+  clickAccesoriesCategory() {
+    this.elements.getAccesoriesCategory().scrollIntoView().click();
+    cy.wait(3500);
+  }
+
+  clickCloseModalButton() {
+    this.elements.getCloseModalButton().click();
+    cy.wait(1000);
+  }
+
+  clickCartButton() {
+    this.elements.getCartButton().click();
+    cy.wait(2200);
   }
 }
