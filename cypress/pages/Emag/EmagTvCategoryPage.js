@@ -45,7 +45,7 @@ export class EmagTvCategoryPage {
 
   selectSortOption(optionText) {
     this.elements.getSortDropdown().click({ force: true });
-    cy.get("a").contains(optionText).should("be.visible").click();
+    cy.get("a").contains(optionText).scrollIntoView().should("be.visible").click();
     cy.wait(2000);
   }
 
